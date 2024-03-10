@@ -100,8 +100,8 @@ app.post('/email' , async (req , res)=>{
    `;
    
    var mailOptions = {
-     from: 'anuragma807@gmail.com',
-     to: 'gathavishesh@gmail.com',
+     from: 'websitecapflow@gmail.com',
+     to: 'gurmeetsinghc2003@gmail.com',
      subject: 'Inquiry from Capflow Website!',
      // text: 'Hello your status for schalrship has been updated  Successfully.Now u can apply and avail the benefits of Scholarships',
      html: htmlContent
@@ -117,7 +117,7 @@ try{
   })
    transporter.sendMail(mailOptions, (error, info) => {
 
-      
+
       if (error) {
         console.error('Error sending email:', error);
       } else {
