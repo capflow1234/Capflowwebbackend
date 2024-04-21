@@ -5,6 +5,10 @@ const port = process.env.PORT || 5000
 const nodemailer = require("nodemailer");
 const cors = require("cors");
 const { Enquiry } = require('./Models/EnquirySchema');
+const Blog = require('./Models/BlogSchema');
+const CaseStudy = require('./Models/CaseStudySchema');
+const SmeKnowledge = require('./Models/SmeKnowledgeSchema');
+
 
  const app = express()
 
@@ -138,6 +142,120 @@ try{
    }
 
 })
+
+app.get('/allblogs' ,async (req , res)=>{
+
+  try{
+    const blogs = await  Blog.find({})
+    res.json({
+      "status":true,
+      "data":blogs
+    })
+  }
+  catch(e)
+  {
+    console.log("Error occured")
+    res.json
+    ({
+      "status":false
+    })
+  }
+
+
+
+})
+
+
+
+app.post('/blogs', async (req, res) => {
+  try {
+    // Generate slug from title
+
+    const newblog = new Blog({
+      ...req.body,
+
+    });
+    const savedblog = await newblog.save();
+    res.status(201).json(savedblog);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+
+app.post('/casestudies', async (req, res) => {
+  try {
+    // Generate slug from title
+
+    const data = new CaseStudy({
+      ...req.body,
+
+    });
+    const savedcasestudy = await data.save();
+    res.status(201).json(savedcasestudy);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+app.get('/allcasestudies' , async (req , res)=>{
+  try{
+    const cases = await  CaseStudy.find({})
+    res.json({
+      "status":true,
+      "data":cases
+    })
+  }
+  catch(e)
+  {
+    console.log("Error occured")
+    res.json
+    ({
+      "status":false
+    })
+  }
+
+
+
+})
+
+app.post('/smes', async (req, res) => {
+  try {
+    // Generate slug from title
+
+    const data = new SmeKnowledge({
+      ...req.body,
+
+    });
+    const savedsme = await data.save();
+    res.status(201).json(savedsme);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+app.get('/allsmes' , async (req , res)=>{
+  try{
+    const sme = await  SmeKnowledge.find({})
+    res.json({
+      "status":true,
+      "data":sme
+    })
+  }
+  catch(e)
+  {
+    console.log("Error occured")
+    res.json
+    ({
+      "status":false
+    })
+  }
+
+
+
+})
+
+
 
 
 
